@@ -2,10 +2,10 @@ import { AuthProvider } from '../contexts/AuthContext'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
-  return (
+	return (
 		<AuthProvider>
 			<Component {...pageProps} />
-		</AuthProvider> 
+		</AuthProvider>
 	)
 }
 

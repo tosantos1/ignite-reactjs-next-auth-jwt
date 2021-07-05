@@ -3,7 +3,6 @@ import { setCookie, parseCookies, destroyCookie } from 'nookies'
 import Router from 'next/router'
 
 import { api } from "../services/apiClient"
-import { setupAPIClient } from "../services/api";
 
 
 type User = {
@@ -44,11 +43,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { 'nextauth.token': token } = parseCookies()
 
     if (token) {
-      api.get('/me').then(response => {
-        const { email, permissions, roles } = response.data
+      api.get('/me')
+        .then(response => {
+          const { email, permissions, roles } = response.data
 
-        setUser({ email, permissions, roles })
-      })
+          setUser({ email, permissions, roles })
+        })
         .catch(() => {
           signOut()
         })
