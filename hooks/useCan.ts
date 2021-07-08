@@ -13,6 +13,7 @@ export function useCan({ permissions, roles }: UseCanParams) {
   if (!isAuthenticated) {
     return false;
   }
+
   const userHasValidPermissions = validateUserPermissions({
     user,
     permissions,

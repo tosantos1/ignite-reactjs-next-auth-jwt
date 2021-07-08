@@ -2,8 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
 import Router from 'next/router'
 
-import { api } from "../services/apiClient"
-
+import { api } from "../services/apiClient";
 
 type User = {
   email: string;
@@ -39,7 +38,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>();
   const isAuthenticated = !!user;
 
-  useEffect(() => { // Sempre roda pelo lado do servidor
+  useEffect(() => {
     const { 'nextauth.token': token } = parseCookies()
 
     if (token) {
@@ -50,7 +49,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           setUser({ email, permissions, roles })
         })
         .catch(() => {
-          signOut()
+          signOut();
         })
     }
   }, [])
@@ -61,6 +60,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password,
       })
+
+      console.log(response.data)
 
       const { token, refreshToken, permissions, roles } = response.data;
 
